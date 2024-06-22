@@ -60,7 +60,7 @@ describe('Suite de testes crud (post, get, put, delete USER)', () => {
     });
 
     it('Deverá remover o registro cadastrado anteriormente. E retornar 204.', async () => {
-        const response = await request(URLS.ENDPOINT_USERS)
+        const response = await request(URLS.ROTA_ENDPOINT)
             .delete(`/users/${recebeId}`)
 
         expect(response.status).toBe(204);

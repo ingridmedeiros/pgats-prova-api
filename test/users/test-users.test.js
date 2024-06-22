@@ -2,21 +2,21 @@ const request = require('supertest');
 require('dotenv').config();
 
 const { faker } = require('@faker-js/faker');
-const rotaUsers = process.env.ROTA_ENDPOINT;
+const rotaUsers = process.env.URL_ROTA;
 
 describe('Suite de testes crud (post, get, put, delete)', () => {
 
     let recebeId;
 
     const payloadUsuario = {
-        nome: faker.name.fullName(),
+        nome: faker.person.fullName(),
         telefone: faker.phone.number('+55 (##) ####-####'),
         email: faker.internet.email(),
         senha: faker.internet.password()
     }
 
     const payloadUsuarioEmailFieldNull = {
-        nome: faker.name.fullName(),
+        nome: faker.person.fullName(),
         telefone: faker.phone.number('+55 (##) ####-####'),
         email: null,
         senha: faker.internet.password()
