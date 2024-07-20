@@ -18,7 +18,7 @@ describe('Suite de testes crud (post, get, put, delete USER)', () => {
             senha: faker.internet.password()
         }
 
-        const response = await request(URLS.ROTA_ENDPOINT)
+        const response = await request(URLS.ROTA_USUARIO)
             .post('/users')
             .set(HEADERS.CONTENT_TYPE)
             .send(payloadUsuario);
@@ -38,7 +38,7 @@ describe('Suite de testes crud (post, get, put, delete USER)', () => {
             senha: faker.internet.password()
         }
 
-        const responsePut = await request(URLS.ROTA_ENDPOINT)
+        const responsePut = await request(URLS.ROTA_USUARIO)
             .put(`/users/${recebeId}`)
             .send(novoUsuario)
 
@@ -48,7 +48,7 @@ describe('Suite de testes crud (post, get, put, delete USER)', () => {
         expect(responsePut.body.telefone).toBe(novoUsuario.telefone);
 
         console.log('Usuário alterado: ', responsePut.body);
-        const responseGet = await request(URLS.ROTA_ENDPOINT)
+        const responseGet = await request(URLS.ROTA_USUARIO)
             .get(`/users/${recebeId}`)
 
         expect(responseGet.status).toBe(200);
@@ -60,13 +60,13 @@ describe('Suite de testes crud (post, get, put, delete USER)', () => {
     });
 
     it('Deverá remover o registro cadastrado anteriormente. E retornar 204.', async () => {
-        const response = await request(URLS.ROTA_ENDPOINT)
+        const response = await request(URLS.ROTA_USUARIO)
             .delete(`/users/${recebeId}`)
 
         expect(response.status).toBe(204);
         console.log('Resposta do delete:', response.body)
 
-        const responseGet = await request(URLS.ROTA_ENDPOINT)
+        const responseGet = await request(URLS.ROTA_USUARIO)
             .get(`/users/${recebeId}`)
 
         expect(responseGet.status).toBe(404);

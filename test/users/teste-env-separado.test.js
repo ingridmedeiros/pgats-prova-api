@@ -25,7 +25,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
     }
 
     it('Ausencia de campo email, deverá gerar o status code 422 e emitir uma mensagem de erro validando a mesma.', async () => {
-        const response = await request(URLS.ROTA_ENDPOINT)
+        const response = await request(URLS.ROTA_USUARIO)
             .post('/users')
             .send(payloadUsuarioEmailFieldNull);
 
@@ -38,7 +38,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
     })
 
     it('Cadastrando um usuário, e consultando o retorno dos campos, se foram os enviados.', async () => {
-        const response = await request(URLS.ROTA_ENDPOINT)
+        const response = await request(URLS.ROTA_USUARIO)
             .post('/users')
             .set(HEADERS.CONTENT_TYPE)
             .send(payloadUsuario);
@@ -64,7 +64,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
         }
 
         //passamos o usuário como parâmetro no id da rota
-        const responsePut = await request(URLS.ROTA_ENDPOINT)
+        const responsePut = await request(URLS.ROTA_USUARIO)
             .put(`/users/${recebeId}`)
             .send(novoUsuario)
 
@@ -79,7 +79,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
         console.log('Usuário alterado: ', responsePut.body);
 
         //validar a consulta dos dados se estão retornando os dados que foram alterados.
-        const responseGet = await request(URLS.ROTA_ENDPOINT)
+        const responseGet = await request(URLS.ROTA_USUARIO)
             .get(`/users/${recebeId}`)
 
         expect(responseGet.status).toBe(200);
@@ -92,7 +92,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
     })
 
     it('Deverá remover o registro cadastrado anteriormente. E retornar 204.', async () => {
-        const response = await request(URLS.ROTA_ENDPOINT)
+        const response = await request(URLS.ROTA_USUARIO)
             .delete(`/users/${recebeId}`)
 
         //validar o statusCode
@@ -100,7 +100,7 @@ describe('Suite de testes crud (post, get, put, delete)', () => {
         console.log('Resposta do delete:', response.body)
 
         //validar se realmente foi removido o registro
-        const responseGet = await request(URLS.ROTA_ENDPOINT)
+        const responseGet = await request(URLS.ROTA_USUARIO)
             .get(`/users/${recebeId}`)
 
         expect(responseGet.status).toBe(404);
